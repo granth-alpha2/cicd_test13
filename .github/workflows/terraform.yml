@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: hashicorp/setup-terraform@v4
-      - run: terraform init -backend-config="key=dev.tfstate"
+      - run: terraform init -backend-config="key=dev.tfstate" #create a dev env statefile
       - run: terraform apply -auto-approve -var-file=envs/dev.tfvars
       
 
@@ -32,6 +32,8 @@ jobs:
       - uses: hashicorp/setup-terraform@v4
       - run: terraform init -backend-config="key=staging.tfstate"
       - run: terraform apply -auto-approve -var-file=envs/staging.tfvars
+      - run: terraform apply -auto-approve -var-file=envs/staging.tfvars
+
 
   prod:
     needs: staging
